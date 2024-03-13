@@ -48,15 +48,15 @@ print("datasize: ", dataSize)
 model = tf.keras.Sequential([
     # tf.keras.layers.Embedding(vocab_size, 64, input_length=window_size),
     # tf.keras.layers.Embedding(vocab_size, 64),
-    tf.keras.layers.LSTM(units=128, input_shape=(window_size, vocab_size)),
+    tf.keras.layers.LSTM(units=32, input_shape=(window_size, vocab_size)),
     tf.keras.layers.Dense(units=vocab_size),
     tf.keras.layers.Softmax()
 ])
 
 # loss = tf.losses.SparseCategoricalCrossentropy(from_logits=True)
 # model.compile(loss=loss, optimizer='adam')
-# model.compile(loss='categorical_crossentropy', optimizer='adam')
-model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.RMSprop(learning_rate=0.02), metrics=['accuracy'])
+model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.Adam(), metrics=['accuracy'])
+# model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.RMSprop(learning_rate=0.02), metrics=['accuracy'])
 history = model.fit(X_train, Y_train, epochs=8, batch_size=batch_size, verbose=True, validation_split=0.05)
 model.save("shittygpt.model")
 
