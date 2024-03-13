@@ -6,7 +6,7 @@ import re
 
 
 window_size = 5
-batch_size = 1
+batch_size = 32
 
 with open('trainingdata_min.txt', 'r', encoding='utf8') as f:
     # data = set(f.read().split())
@@ -57,8 +57,8 @@ model = tf.keras.Sequential([
 # model.compile(loss=loss, optimizer='adam')
 model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.Adam(), metrics=['accuracy'])
 # model.compile(loss='categorical_crossentropy', optimizer=tf.optimizers.RMSprop(learning_rate=0.02), metrics=['accuracy'])
-history = model.fit(X_train, Y_train, epochs=8, batch_size=batch_size, verbose=True, validation_split=0.05)
-model.save("shittygpt.model")
+history = model.fit(X_train, Y_train, epochs=15, batch_size=batch_size, verbose=True, validation_split=0.05)
+model.save("shittygpt")
 
 # print(history)
 # print(history.history)
